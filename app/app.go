@@ -15,21 +15,11 @@ import (
 	"appengine/datastore"
 )
 
-type AppHandler func(http.ResponseWriter, *http.Request) *model.AppError
-
-func (fn AppHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if e := fn(w, r); e != nil { // e is *model.AppError, not os.ERror.
-		c := appengine.NewContext(r)
-		c.Errorf("%v", e.Error)
-		http.Error(w, e.Message, e.Code)
-	}
-}
-
 func init() {
 	r := mux.NewRouter()
-	r.Handle("/", AppHandler(root)).Methods("GET")
-	r.Handle("/{id}", AppHandler(viewEmail)).Methods("GET")
-	r.Handle("/_ah/mail/", AppHandler(incomingMail)).Methods("POST")
+	r.Handle("/", model.AppHandler(root)).Methods("GET")
+	r.Handle("/{id}", model.AppHandler(viewEmail)).Methods("GET")
+	r.Handle("/_ah/mail/", model.AppHandler(incomingMail)).Methods("POST")
 	http.Handle("/", r)
 }
 
