@@ -35,8 +35,8 @@ func init() {
 	r := mux.NewRouter()
 	r.Handle("/", appHandler(root)).Methods("GET")
 	r.Handle("/{id}", appHandler(viewEmail)).Methods("GET")
+	r.Handle("/_ah/mail/", appHandler(incomingMail)).Methods("POST")
 	http.Handle("/", r)
-	http.Handle("/_ah/mail/", appHandler(incomingMail))
 }
 
 func root(w http.ResponseWriter, r *http.Request) *appError {
