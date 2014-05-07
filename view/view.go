@@ -8,10 +8,11 @@ import (
 )
 
 // Base directory relative to app.go where templates are stored
-const tD = "../view/"
+const tD = "view/"
 
 var templates = template.Must(template.ParseFiles(
-	tD + "index.html",
+	tD+"index.html",
+	tD+"page.html",
 ))
 
 func RenderTemplate(w http.ResponseWriter, tmpl string,
