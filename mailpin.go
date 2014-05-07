@@ -66,7 +66,8 @@ func incomingMail(w http.ResponseWriter, r *http.Request) *appError {
 	id := hex.EncodeToString(hasher.Sum(nil))
 
 	page := model.Page{
-		Body: bytes,
+		Subject: msg.Header["Subject"][0],
+		Body:    bytes,
 	}
 
 	key := model.NewPageKey(c, id)

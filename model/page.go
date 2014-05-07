@@ -6,7 +6,8 @@ import (
 )
 
 type Page struct {
-	Body []byte
+	Subject string
+	Body    []byte
 }
 
 func GetPage(c appengine.Context, id string) (*Page, error) {
