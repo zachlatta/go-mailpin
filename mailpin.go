@@ -33,7 +33,8 @@ func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func init() {
 	r := mux.NewRouter()
-	r.Handle("/", appHandler(root))
+	r.Handle("/", appHandler(root)).Methods("GET")
+	r.Handle("/{id}", appHandler(viewEmail)).Methods("GET")
 	http.Handle("/", r)
 	http.Handle("/_ah/mail/", appHandler(incomingMail))
 }
@@ -43,6 +44,20 @@ func root(w http.ResponseWriter, r *http.Request) *appError {
 
 Mail to p@go-mailpin.appspotmail.com. Get a short sharable URL.
   `)
+	return nil
+}
+
+func viewEmail(w http.ResponseWriter, r *http.Request) *appError {
+	c := appengine.NewContext(r)
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	page, err := model.GetPage(c, id)
+	if err != nil {
+		return &appError{err, "Page not found", http.StatusNotFound}
+	}
+
+	w.Write(page.Body)
 	return nil
 }
 
