@@ -7,7 +7,7 @@ import (
 
 type Page struct {
 	Subject string
-	Body    []byte
+	Body    string
 }
 
 func GetPage(c appengine.Context, id string) (*Page, error) {

@@ -15,9 +15,8 @@ func init() {
 
 	r.Handle("/", model.AppHandler(root)).Methods("GET")
 	r.Handle("/{id}", model.AppHandler(page.View)).Methods("GET")
-	r.Handle("/_ah/mail/", model.AppHandler(email.IncomingHandler)).
-		Methods("POST")
 
+	http.Handle("/_ah/mail/", model.AppHandler(email.IncomingHandler))
 	http.Handle("/", r)
 }
 

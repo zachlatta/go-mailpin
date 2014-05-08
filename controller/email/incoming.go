@@ -34,7 +34,7 @@ func IncomingHandler(w http.ResponseWriter, r *http.Request) *model.AppError {
 
 	page := model.Page{
 		Subject: msg.Header["Subject"][0],
-		Body:    bytes,
+		Body:    string(bytes),
 	}
 
 	key := model.NewPageKey(c, id)
