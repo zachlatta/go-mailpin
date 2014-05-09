@@ -52,7 +52,7 @@ func IncomingHandler(w http.ResponseWriter, r *http.Request) *model.AppError {
 	}
 
 	notifyMsg := &appMail.Message{
-		Sender:  "go-mailpin <noreply@go-mailpin.appspot.com>",
+		Sender:  "go-mailpin <noreply@go-mailpin.appspotmail.com>",
 		To:      addressesToStrings(addresses),
 		Subject: "Mailpin",
 		Body:    fmt.Sprintf("https://go-mailpin.appspot.com/%s", id),
