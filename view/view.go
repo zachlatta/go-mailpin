@@ -1,8 +1,8 @@
 package view
 
 import (
+	"html/template"
 	"net/http"
-	"text/template"
 
 	"github.com/zachlatta/go-mailpin/model"
 )
