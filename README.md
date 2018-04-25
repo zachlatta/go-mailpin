@@ -1,6 +1,6 @@
 # go-mailpin
 
-go-mailpin is an open source clone of http://mailp.in/ on Google App Engine.
+go-mailpin is an open source clone of [http://mailp.in/](https://web.archive.org/web/20170728112303/http://mailp.in) on Google App Engine.
 
 ## Usage
 
